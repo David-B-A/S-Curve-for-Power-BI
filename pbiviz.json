@@ -1,0 +1,27 @@
+{
+  "visual": {
+    "name": "scurve",
+    "displayName": "s_curve",
+    "guid": "scurveEADFCB4FFCAB40C3B37ADAEE7DBC1578",
+    "visualClassName": "Visual",
+    "version": "1.0.0",
+    "description": "",
+    "supportUrl": "",
+    "gitHubUrl": ""
+  },
+  "apiVersion": "2.5.0",
+  "author": {
+    "name": "",
+    "email": ""
+  },
+  "assets": {
+    "icon": "assets/icon.png"
+  },
+  "externalJS": [
+    "node_modules/powerbi-visuals-utils-dataviewutils/lib/index.js"
+  ],
+  "style": "style/visual.less",
+  "capabilities": "capabilities.json",
+  "dependencies": "dependencies.json",
+  "stringResources": []
+}
