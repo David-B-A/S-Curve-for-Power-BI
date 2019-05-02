@@ -796,8 +796,8 @@ var powerbi;
     (function (visuals) {
         var plugins;
         (function (plugins) {
-            plugins.scurveEADFCB4FFCAB40C3B37ADAEE7DBC1578 = {
-                name: 'scurveEADFCB4FFCAB40C3B37ADAEE7DBC1578',
+            plugins.scurveEADFCB4FFCAB40C3B37ADAEE7DBC1578_DEBUG = {
+                name: 'scurveEADFCB4FFCAB40C3B37ADAEE7DBC1578_DEBUG',
                 displayName: 's_curve',
                 class: 'Visual',
                 version: '1.0.0',

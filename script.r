@@ -6,50 +6,57 @@ libraryRequireInstall("plotly")
 ####################################################
 
 ################### Actual code ####################
+############################################
 dataset = data.frame(Value)
-
+############################################
 dataset$FECHA = as.Date(dataset$SEMANA)
-somos =which(dataset$SOMO != "")
-somos=c(somos,length(dataset$SEMANA))
-FECHA_PLAN=dataset$FECHA[1:somos[1]]
-PLAN=dataset$PLAN[1:somos[1]]
-plot = ggplot()+ geom_line(aes(x=FECHA_PLAN, y=PLAN, color="PLAN"))
+RealPositions = which(dataset$REAL != "")
 
-l = length(dataset)
-lineas_somos = array()
-i=0
-FECHA = list()
-PLAN_SOMO = list()
-colour=list()
-data_label = list()
-while (i < length(somos)-1) {
-  i=i+1
-  print(i)
-  FECHA[[i]]=(dataset$FECHA[(somos[i]+1):somos[i+1]])
-  PLAN_SOMO[[i]]=dataset$PLAN[(somos[i]+1):somos[i+1]]
-  colour[[i]]=(paste('PLAN SOMO',i))
-  data_label[[i]] = paste('Plan:', dataset$PLAN[(somos[i]+1):somos[i+1]],
-                          '<br>Date: ', (dataset$FECHA[(somos[i]+1):somos[i+1]]),
-                          '<br>Somo: ', i)
+if(range(dataset$PLAN)[2]<=1){
+  dataset$PLAN = dataset$PLAN*100
 }
-i=0
-while (i < length(somos)-1) {
-  i=i+1
-  loop_input = paste("geom_line(aes(x=FECHA[[",i,"]], y=PLAN_SOMO[[",i,"]], color=colour[[",i,"]], text='",data_label[[i]],"'))")
-  plot = plot + eval(parse(text=loop_input))
-  lineas_somos[somos[i]] = 0.5
+if(range(dataset$REAL[RealPositions])[2]<=1){
+  dataset$REAL = dataset$REAL*100
 }
-FECHA_REAL=dataset$FECHA
-REAL=dataset$REAL
-SOMO=dataset$FECHA[somos]
-plot = plot + geom_bar(aes(x=SOMO), width = 0.25, colour="darkgoldenrod")
-plot = plot + geom_line(aes(x=FECHA_REAL, y=REAL, color="REAL"))
-plot = plot + labs(x = "Fecha", 
-       y = "Avance", 
-       colour = "")
+somos =which(dataset$SOMO != "")
+somos=c(somos,length(dataset$FECHA))
+
+Dates = as.Date(dataset$FECHA[1:somos[1]])
+Avance = dataset$PLAN[1:somos[1]]
+Linea = c()
+for(i in 1:somos[1]){
+  Linea = c(Linea, "PLAN")
+}
+
+for(j in 1:(length(somos)-1)){
+  Dates= c(Dates, dataset$FECHA[(somos[j]+1):somos[j+1]])
+  Avance = c(Avance, dataset$PLAN[(somos[j]+1):somos[j+1]])
+  for(k in (somos[j]+1):(somos[j+1])){
+    Linea = c(Linea, paste("SOMO",j))
+  }
+}
+
+Dates= c(Dates,dataset$FECHA[RealPositions])
+Avance = c(Avance, dataset$REAL[RealPositions])
+for(z in RealPositions){
+  Linea = c(Linea, paste("REAL",j))
+}
+
+
+df <- data.frame(Dates = Dates,
+                 Variable_Data=Avance, Variable_Name=Linea)
+df$Dates <- as.Date(df$Dates,"%m/%d/%y")
+
+plot <- ggplot(data = df, aes(x=Dates, y=Variable_Data, 
+                           colour=Variable_Name, group=1,
+                           text = paste('Fecha: ', Dates,
+                                        '<br>Linea:', Variable_Name, 
+                                        '<br>Avance:', Variable_Data,'%'))) + 
+        geom_line(size = 1) + labs(colour = "") + xlab("Fecha") + ylab("Avance") + theme_grey(base_size = 20)
 ####################################################
 
 ############# Create and save widget ###############
-p = ggplotly(plot, tooltip = c("text"), margin=dict(t=50));
+p = ggplotly(plot, tooltip = "text")%>%
+  layout(hovermode = "x")
 internalSaveWidget(p, 'out.html');
 ####################################################
