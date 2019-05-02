@@ -1,9 +1,24 @@
 {
   "dataRoles": [
     {
-      "displayName": "Value",
+      "displayName": "Dates",
       "kind": "GroupingOrMeasure",
-      "name": "Value"
+      "name": "dates"
+    },
+    {
+      "displayName": "Plan",
+      "kind": "Measure",
+      "name": "plan"
+    },
+    {
+      "displayName": "Real",
+      "kind": "Measure",
+      "name": "real"
+    },
+    {
+      "displayName": "Change Control",
+      "kind": "Measure",
+      "name": "change_control"
     }
   ],
   "dataViewMappings": [
@@ -14,8 +29,23 @@
             "rows": {
               "select": [
                 {
+                  "bind": {
+                    "to": "dates"
+                  }
+                },
+                {
+                  "bind": {
+                    "to": "plan"
+                  }
+                },
+                {
+                  "bind": {
+                    "to": "real"
+                  }
+                },
+                {
                   "for": {
-                    "in": "Value"
+                    "in": "change_control"
                   }
                 }
               ],
