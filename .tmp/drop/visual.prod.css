@@ -1,16 +1,1 @@
-.visual-scurveEADFCB4FFCAB40C3B37ADAEE7DBC1578_DEBUG .rcv_autoScaleImageContainer {
-  position: relative;
-}
-.visual-scurveEADFCB4FFCAB40C3B37ADAEE7DBC1578_DEBUG .rcv_autoScaleImageContainer .rcv_autoScaleImage {
-  max-width: 100%;
-  max-height: 100%;
-  position: absolute;
-  top: 50%;
-  
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%);
-  -webkit-transform: translateY(-50%) translateX(-50%);
-}
-.visual-scurveEADFCB4FFCAB40C3B37ADAEE7DBC1578_DEBUG .hovertext text {
-  font-size: 20px !important;
-}
+.visual-scurveEADFCB4FFCAB40C3B37ADAEE7DBC1578 .rcv_autoScaleImageContainer{position:relative}.visual-scurveEADFCB4FFCAB40C3B37ADAEE7DBC1578 .rcv_autoScaleImageContainer .rcv_autoScaleImage{max-width:100%;max-height:100%;position:absolute;top:50%;left:50%;transform:translateY(-50%) translateX(-50%);-webkit-transform:translateY(-50%) translateX(-50%)}.visual-scurveEADFCB4FFCAB40C3B37ADAEE7DBC1578 .hovertext text{font-size:20px !important}

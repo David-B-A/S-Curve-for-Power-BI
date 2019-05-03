@@ -1,6 +1,11 @@
 {
   "dataRoles": [
     {
+      "displayName": "Request",
+      "kind": "GroupingOrMeasure",
+      "name": "request"
+    },
+    {
       "displayName": "Dates",
       "kind": "GroupingOrMeasure",
       "name": "dates"
@@ -28,6 +33,11 @@
           "table": {
             "rows": {
               "select": [
+                {
+                  "bind": {
+                    "to": "request"
+                  }
+                },
                 {
                   "bind": {
                     "to": "dates"
