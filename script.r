@@ -3,9 +3,9 @@ source('./r_files/flatten_HTML.r')
 ############### Library Declarations ###############
 libraryRequireInstall("ggplot2");
 libraryRequireInstall("plotly");
-libraryRequireInstall("reshape2")
+libraryRequireInstall("reshape2");
 ####################################################
-
+color_pelette = c( "#fece00", "#00ff00", "#9e00ff", "#ff0052",	"#00f3ff", 	"#b80000", "#ff00aa",	"#781300")
 ################### Actual code ####################
 ############################################
 orig_dates = as.Date(as.vector(as.matrix(dates)))
@@ -66,11 +66,17 @@ if(length(unique(orig_request)) <= 1){
                    variable_data=progress, Variable_Name=base_line)
   
   plot <- ggplot(data = df, aes(x=dates, y=variable_data, 
-                             colour=Variable_Name, group=1,
-                             text = paste('Fecha: ', dates,
-                                          '<br>Linea:', Variable_Name, 
-                                          '<br>Avance:', variable_data,'%'))) + 
-          geom_line(size = 1.2) + labs(colour = "") + xlab("Fecha") + ylab("Avance") + theme_grey(base_size = 14)
+                                colour=Variable_Name, group=1,
+                                text = paste('Fecha: ', dates,
+                                             '<br>Linea:', Variable_Name, 
+                                             '<br>Avance:', variable_data,'%'))) + 
+    geom_line(size = 1.2) + labs(colour = "") + 
+    xlab("Fecha") + ylab("Avance") + theme_grey(base_size = 14) + 
+    theme(
+      panel.background = element_rect(fill = 'white'),
+      panel.grid = element_line(color = "lightblue"),
+    )+ scale_color_manual(values = color_pelette)
+
   ############# Create and save widget ###############
   ############
   p = ggplotly(plot, tooltip = "text")%>%
@@ -80,6 +86,10 @@ if(length(unique(orig_request)) <= 1){
   ####################################################
 } else {
   ua=unique(orig_request)
+  ua=ua[which(ua!="")]
+  if(length(ua)>10){
+    ua=ua[1:10]
+  }
   bp=c()
   cp=c()
   for(i in 1:length(ua)){
@@ -89,15 +99,22 @@ if(length(unique(orig_request)) <= 1){
     bp=c(bp,bfn[max(which(cfn != ""))])
     cp=c(cp,cfn[max(which(cfn != ""))])
   }
+  ua=c(ua,"More...")
+  bp=c(bp,0)
+  cp=c(cp,0)
   data=data.frame("FN"=ua,"PLAN"=bp,"REAL"=cp)
   data <- melt(data, id="FN")
   names(data)=c("FN","VARIABLE","AVANCE")
 
   plot=ggplot(data,aes(x=FN,y=AVANCE,fill=VARIABLE))+
     geom_bar(stat="identity",position="dodge")+
-    xlab("SOLICITUD")+ylab("AVANCE")+ theme_grey(base_size = 14)
-
-  ggplotly(plot)
+    xlab(" ")+ylab("AVANCE")+ theme_grey(base_size = 14)+ 
+    theme(
+      axis.text.x = element_text(angle = 25, hjust = 1),
+      panel.background = element_rect(fill = 'white'),
+      panel.grid = element_line(color = "lightblue"),
+    )+ scale_fill_manual(values = color_pelette)
+    
   ############# Create and save widget ###############
   ############
   p = ggplotly(plot)

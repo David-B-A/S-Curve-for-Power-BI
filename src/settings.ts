@@ -24,12 +24,12 @@
  *  THE SOFTWARE.
  */
 
-module powerbi.extensibility.visual {
-    "use strict";
+"use strict";
 
-    import DataViewObjectsParser = powerbi.extensibility.utils.dataview.DataViewObjectsParser;
+import { dataViewObjectsParser } from "powerbi-visuals-utils-dataviewutils";
+import DataViewObjectsParser = dataViewObjectsParser.DataViewObjectsParser;
 
-   export class VisualSettings extends DataViewObjectsParser {
+export class VisualSettings extends DataViewObjectsParser {
       public rcv_script: rcv_scriptSettings = new rcv_scriptSettings();
       }
 
@@ -38,4 +38,3 @@ module powerbi.extensibility.visual {
       public provider     // undefined
       public source     }
 
-}
