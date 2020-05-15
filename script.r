@@ -17,7 +17,7 @@ color_pelette = c(
   "CC 7" = "#0000ff",
   "CC 8" = "#5000e4",
   "CC 9" = "#e48900",
-  "CC 10" = "#e48900")
+  "CC 10" = "#e489aa")
 ################### Actual code ####################
 ############################################
 orig_dates = as.Date(as.vector(as.matrix(dates)))
@@ -125,7 +125,7 @@ if(length(unique(orig_request)) <= 1){
       axis.text.x = element_text(angle = 25, hjust = 1),
       panel.background = element_rect(fill = 'white'),
       panel.grid = element_line(color = "lightblue"),
-    )+ scale_fill_manual(values = color_pelette)
+    ) + scale_fill_manual(values = color_pelette)
     
   ############# Create and save widget ###############
   ############
