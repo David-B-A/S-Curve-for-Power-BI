@@ -1,0 +1,17 @@
+{
+    "version": "1.0.0",
+    "author": {"name":"UTGI2016","email":"d.bello@utgestioninmobiliaria.com"},
+    "resources": [
+        {
+            "resourceId": "rId0",
+            "sourceType": 5,
+            "file": "resources/sCurve202014CC21376AD74A61B4E9BBB5F18BF23A.pbiviz.json"
+        }
+    ],
+    "visual": {"name":"sCurve2020","displayName":"SCurve2020","guid":"sCurve202014CC21376AD74A61B4E9BBB5F18BF23A","visualClassName":"Visual","version":"1.0.0","description":"S Curve for Power BI ECP","supportUrl":"https://github.com/David-B-A/S-Curve-for-Power-BI.git","gitHubUrl":"https://github.com/David-B-A/S-Curve-for-Power-BI.git"},
+    "metadata": {
+        "pbivizjson": {
+            "resourceId": "rId0"
+        }
+    }  
+}

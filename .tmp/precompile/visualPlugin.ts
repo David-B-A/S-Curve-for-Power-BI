@@ -1,19 +1,21 @@
 import { Visual } from "../../src/visual";
-var powerbiKey = "powerbi";
-var powerbi = window[powerbiKey];
+import powerbiVisualsApi from "powerbi-visuals-api"
+import IVisualPlugin = powerbiVisualsApi.visuals.plugins.IVisualPlugin
+import VisualConstructorOptions = powerbiVisualsApi.extensibility.visual.VisualConstructorOptions
+var powerbiKey: any = "powerbi";
+var powerbi: any = window[powerbiKey];
 
-var rscurveAB92463F20EE4FA295A2A717DF7E60A5_DEBUG = {
-    name: 'rscurveAB92463F20EE4FA295A2A717DF7E60A5_DEBUG',
-    displayName: 'rscurve',
+var sCurve202014CC21376AD74A61B4E9BBB5F18BF23A: IVisualPlugin = {
+    name: 'sCurve202014CC21376AD74A61B4E9BBB5F18BF23A',
+    displayName: 'SCurve2020',
     class: 'Visual',
-    version: '1.0.0',
     apiVersion: '2.6.0',
-    create: (options) => {
+    create: (options: VisualConstructorOptions) => {
         if (Visual) {
             return new Visual(options);
         }
 
-        console.error('Visual instance not found');
+        throw 'Visual instance not found';
     },
     custom: true
 };
@@ -21,7 +23,7 @@ var rscurveAB92463F20EE4FA295A2A717DF7E60A5_DEBUG = {
 if (typeof powerbi !== "undefined") {
     powerbi.visuals = powerbi.visuals || {};
     powerbi.visuals.plugins = powerbi.visuals.plugins || {};
-    powerbi.visuals.plugins["rscurveAB92463F20EE4FA295A2A717DF7E60A5_DEBUG"] = rscurveAB92463F20EE4FA295A2A717DF7E60A5_DEBUG;
+    powerbi.visuals.plugins["sCurve202014CC21376AD74A61B4E9BBB5F18BF23A"] = sCurve202014CC21376AD74A61B4E9BBB5F18BF23A;
 }
 
-export default rscurveAB92463F20EE4FA295A2A717DF7E60A5_DEBUG;
+export default sCurve202014CC21376AD74A61B4E9BBB5F18BF23A;

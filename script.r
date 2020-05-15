@@ -5,7 +5,19 @@ libraryRequireInstall("ggplot2");
 libraryRequireInstall("plotly");
 libraryRequireInstall("reshape2");
 ####################################################
-color_pelette = c( "#fece00", "#00ff00", "#9e00ff", "#ff0052",	"#00f3ff", 	"#b80000", "#ff00aa",	"#781300")
+color_pelette = c( 
+  "PLAN" = "#fece00",
+  "REAL" = "#00ff00",
+  "CC 1" = "#9e00ff",
+  "CC 2" = "#ff0052",
+  "CC 3" = "#00f3ff",
+  "CC 4" = "#b80000",
+  "CC 5" = "#ff00aa",
+  "CC 6" = "#781300",
+  "CC 7" = "#0000ff",
+  "CC 8" = "#5000e4",
+  "CC 9" = "#e48900",
+  "CC 10" = "#e48900")
 ################### Actual code ####################
 ############################################
 orig_dates = as.Date(as.vector(as.matrix(dates)))
@@ -44,7 +56,7 @@ if(length(unique(orig_request)) <= 1){
         dates= c(dates, orig_dates[(change_control[j]+1):change_control[j+1]])
         progress = c(progress, orig_plan[(change_control[j]+1):change_control[j+1]])
         for(k in (change_control[j]+1):(change_control[j+1])){
-          base_line = c(base_line, paste("SOMO",j))
+          base_line = c(base_line, paste("CC",j))
         }
       }
     } else {
@@ -75,7 +87,7 @@ if(length(unique(orig_request)) <= 1){
     theme(
       panel.background = element_rect(fill = 'white'),
       panel.grid = element_line(color = "lightblue"),
-    )+ scale_color_manual(values = color_pelette)
+    ) + scale_color_manual(values = color_pelette)
 
   ############# Create and save widget ###############
   ############
