@@ -18,12 +18,13 @@ color_pelette = c(
   "CC 8" = "#5000e4",
   "CC 9" = "#e48900",
   "CC 10" = "#e489aa")
-################### Actual code ####################
+################### code ####################
 ############################################
 orig_dates = as.Date(as.vector(as.matrix(dates)))
 orig_plan = as.vector(as.matrix(plan))
 orig_real = as.vector(as.matrix(real))
 orig_change_control = as.vector(as.matrix(change_control))
+
 if(exists("request")){
   orig_request = as.vector(as.matrix(request))
 } else {
@@ -39,7 +40,7 @@ if(range(orig_real[real_positions])[2]<=1){
   orig_real = orig_real*100
 }
 
-if(length(unique(orig_request)) <= 1){
+if(length(unique(orig_request)) == 1){
   if(exists("change_control"))
   {
     if(length(change_control)){
@@ -96,7 +97,7 @@ if(length(unique(orig_request)) <= 1){
   ############
   internalSaveWidget(p, 'out.html');
   ####################################################
-} else {
+} else if(length(unique(orig_request)) > 1) {
   ua=unique(orig_request)
   ua=ua[which(ua!="")]
   if(length(ua)>10){
@@ -133,6 +134,15 @@ if(length(unique(orig_request)) <= 1){
   ############
   internalSaveWidget(p, 'out.html');
   ####################################################
+} else {
+  df <- data.frame()
+  plot=ggplot(df) + geom_point() + xlim(0, 10) + ylim(0, 100) + theme(
+        axis.text.x = element_text(angle = 25, hjust = 1),
+        panel.background = element_rect(fill = 'white'),
+        panel.grid = element_line(color = "lightblue"),
+      )
+  p = ggplotly(plot)
+  internalSaveWidget(p, 'out.html');
 }
 ############################################
 ####################################################
